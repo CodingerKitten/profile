@@ -21,4 +21,4 @@ Gamification: Level up and unlock new features as you progress.
 
 🚀 Getting Started
 
-ITS IN DEVELOPMENT Sip a coffee or help turn this into a reality
+ITS IN DEVELOPMENT Sip a coffee or help turn this into a reality..
