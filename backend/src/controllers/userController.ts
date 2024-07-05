@@ -6,8 +6,13 @@ import { JwtPayloadWithId } from "../types/express";
 
 /**
  * Registers a new user.
- * @param req - The request object.
- * @param res - The response object.
+ * 
+ * @param {Request} req - The request object.
+ * @param {Response} res - The response object.
+ * @returns {Promise<void>} - A promise that resolves when the user is registered.
+ * @async
+ * @function
+ * @name registerUser
  */
 export const registerUser = async (req: Request, res: Response) => {
     const { name, email, password } = req.body;
@@ -39,8 +44,13 @@ export const registerUser = async (req: Request, res: Response) => {
 
 /**
  * Logs in a user.
- * @param req - The request object.
- * @param res - The response object.
+ * 
+ * @param {Request} req - The request object.
+ * @param {Response} res - The response object.
+ * @returns {Promise<void>} - A promise that resolves when the user is logged in.
+ * @async
+ * @function
+ * @name loginUser
  */
 export const loginUser = async (req: Request, res: Response) => {
     const { email, password } = req.body;
@@ -68,12 +78,20 @@ export const loginUser = async (req: Request, res: Response) => {
     }
 };
 
+/**
+ * Retrieves the user profile.
+ * 
+ * @param {Request} req - The request object.
+ * @param {Response} res - The response object.
+ * @returns {Promise<void>} - A promise that resolves when the user profile is retrieved.
+ * @async
+ * @function
+ * @name getUserProfile
+ */
 export const getUserProfile = async (req: Request, res: Response) => {
     try {
-        // const user = await User.findById((req.user as JwtPayloadWithId).id).select('-password');
-        const user = req.user;
-        if(user){
-        res.status(200).json(user).send("good");}
+        const user = await User.findById((req.user as JwtPayloadWithId).id).select('-password');
+        res.status(200).json(user);
     } catch (error) {
         console.error(error);
         res.status(500).json({message: "Server Error"});
