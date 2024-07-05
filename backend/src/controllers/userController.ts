@@ -97,3 +97,38 @@ export const getUserProfile = async (req: Request, res: Response) => {
         res.status(500).json({message: "Server Error"});
     }
 };
+
+/**
+ * 
+ * Edits the user profile.
+ * 
+ * @param req 
+ * @param res 
+ * @returns {Promise<void>} - A promise that resolves when the user profile is edited.
+ * @async
+ * @function
+ * @name editUserProfile
+ */
+export const editUserProfile = async (req: Request, res: Response) => {
+    const { name, email, password } = req.body;
+
+    try {
+        const user = await User.findById((req.user as JwtPayloadWithId).id);
+
+        const salt = await bcrypt.genSalt(10);
+        const hashedPassword = await bcrypt.hash(password, salt);
+
+        const userUpdate = await User.findByIdAndUpdate(user?._id, {
+            name,
+            email,
+            password: hashedPassword
+        }, {new: true});
+
+        await userUpdate?.save();
+
+        res.status(200).json(userUpdate);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({message: "Server Error"});
+    }
+};

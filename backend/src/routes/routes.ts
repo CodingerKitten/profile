@@ -1,5 +1,5 @@
 import express from 'express';
-import { registerUser, loginUser, getUserProfile } from '../controllers/userController';
+import { registerUser, loginUser, getUserProfile, editUserProfile } from '../controllers/userController';
 import { validateUser } from '../middleware/auth';
 // import { validateRegister, validateLogin } from '../middleware/validateUser';
 
@@ -22,5 +22,11 @@ router.post('/login', loginUser);
  * @name GET/api/users/profile
  */
 router.get('/profile', validateUser, getUserProfile);
+
+/**
+ * Route serving user profile edit.
+ * @name PUT/api/users/profile
+ */
+router.put('/profile', validateUser, editUserProfile);
 
 export default router;
