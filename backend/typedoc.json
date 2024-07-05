@@ -2,10 +2,11 @@
  * Configuration file for TypeDoc
  * @see https://typedoc.org/guides/options/
  */
-{
-    "entryPoints": ["src/server.ts"],
-    "out": "docs",
-    "exclude": ["**/*.spec.ts"],
-    "theme": "default",
-    "includeVersion": true
-  }
+ {
+  "entryPoints": ["src"],
+  "entryPointStrategy": "expand",
+  "out": "docs",
+  "exclude": ["**/*.spec.ts"],
+  "excludeExternals": true,
+  "includeVersion": true
+}
