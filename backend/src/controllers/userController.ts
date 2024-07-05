@@ -2,6 +2,7 @@ import User from "../models/User";
 import { Request, Response } from "express";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
+import { JwtPayloadWithId } from "../types/express";
 
 /**
  * Registers a new user.
@@ -62,6 +63,18 @@ export const loginUser = async (req: Request, res: Response) => {
 
         res.status(200).json({token});
     }catch (error) {
+        console.error(error);
+        res.status(500).json({message: "Server Error"});
+    }
+};
+
+export const getUserProfile = async (req: Request, res: Response) => {
+    try {
+        // const user = await User.findById((req.user as JwtPayloadWithId).id).select('-password');
+        const user = req.user;
+        if(user){
+        res.status(200).json(user).send("good");}
+    } catch (error) {
         console.error(error);
         res.status(500).json({message: "Server Error"});
     }
