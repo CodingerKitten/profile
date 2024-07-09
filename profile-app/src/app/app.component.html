@@ -227,6 +227,15 @@
       </svg>
       <h1>Hello, {{ title }}</h1>
       <p>Congratulations! Your app is running. 🎉</p>
+      <nav>
+        <ul>
+          <li><a routerLink="/login" routerLinkActive="active" aria-current="page">Login</a></li>
+          <li><a routerLink="/register">Register</a></li>
+          <li><a routerLink="/profile">Profile</a></li>
+          <li><a routerLink="/logout">Logout</a></li>
+        </ul>
+      </nav>
+      <router-outlet></router-outlet>
     </div>
     <div class="divider" role="separator" aria-label="Divider"></div>
     <div class="right-side">
