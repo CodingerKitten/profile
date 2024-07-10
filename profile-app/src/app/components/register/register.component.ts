@@ -10,6 +10,16 @@ import { UserService } from '../../../services/user.service';
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss'
 })
+
+/**
+ * RegisterComponent
+ * - This component is responsible for registering a new user with the application.
+ * - It retrieves the user's name, email, and password from the form inputs.
+ * - It calls the UserService register method to create a new user account.
+ * - If the registration is successful, it navigates the user to the login page.
+ * - If the registration fails, it logs an error message to the console.
+ * - The onSubmit method is called when the form is submitted.
+ */
 export class RegisterComponent {
   name = new FormControl('');
   email = new FormControl('');
