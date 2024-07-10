@@ -1,7 +1,9 @@
 <p>login works!</p>
 
 <div>
-<input type="text" placeholder="email" [formControl]="email">
-<input type="password" placeholder="password" [formControl]="password">
-<button (click)="onSubmit()">Login</button>
+    <form>
+        <input type="text" placeholder="email" [formControl]="email">
+        <input type="password" placeholder="password" [formControl]="password">
+        <button type="button" (click)="onSubmit()">Login</button>
+    </form>
 </div>
