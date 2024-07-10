@@ -18,4 +18,8 @@ export class UserService {
   register(name: string, email: string, password: string): Observable<any>{
     return this.http.post(`${this.api}/users/register`, { name, email, password });
   }
+
+  logout(): void {
+    localStorage.removeItem('authToken');
+  }
 }
