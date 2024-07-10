@@ -1,1 +1,9 @@
 <p>register works!</p>
+
+<div>
+    <form>
+        <input type="text" placeholder="name" [formControl]="name">
+        <input type="text" placeholder="email" [formControl]="email">
+        <input type="password" placeholder="password" [formControl]="password">
+        <button type="button" (click)="onSubmit()">Register</button>
+    </form>
