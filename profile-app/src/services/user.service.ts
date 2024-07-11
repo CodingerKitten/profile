@@ -14,7 +14,7 @@ export class UserService {
    * @private
    * @memberof UserService
    */
-  private api = environment.api;
+  private api: string = environment.api;
 
   constructor(private http: HttpClient) {}
 
@@ -69,6 +69,24 @@ export class UserService {
    */
   getUser(): Observable<User> {
     return this.http.get<User>(`${this.api}/users/profile`,{
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('authToken')}`
+      }
+    });
+  }
+
+  /**
+   * Update User
+   * - This method sends a PUT request to the API to update the user's profile information.
+   * - It takes a user object as an argument.
+   * - It returns an Observable of the response from the API.
+   * @param {User} fields
+   * @returns {Observable<User>}
+   * @memberof UserService
+   * @method updateUser
+   */
+  updateUser(fields: Partial<User>): Observable<User> {
+    return this.http.put<User>(`${this.api}/users/profile`, fields, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem('authToken')}`
       }

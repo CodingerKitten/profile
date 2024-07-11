@@ -5,6 +5,16 @@
     <p><strong>Username:</strong> {{ user.name }}</p>
     <p><strong>Email:</strong> {{ user.email }}</p>
   </div>
+  <div>
+    <label for="name">Name :</label>
+    <input type="text" [formControl]="nameControl" name="name">
+    <button (click)="updateName()">Update Name</button>
+  </div>
+  <div>
+    <label for="email">Email :</label>
+    <input type="text" [formControl]="emailControl" name="email">
+    <button (click)="updateEmail()">Update Email</button>
+  </div>
   <div *ngIf="!user">
     <p>Loading profile...</p>
   </div>

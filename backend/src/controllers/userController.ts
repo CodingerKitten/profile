@@ -109,26 +109,56 @@ export const getUserProfile = async (req: Request, res: Response) => {
  * @function
  * @name editUserProfile
  */
+// export const editUserProfile = async (req: Request, res: Response) => {
+//     const { name, email, password } = req.body;
+
+//     try {
+//         const user = await User.findById((req.user as JwtPayloadWithId).id);
+
+//         const salt = await bcrypt.genSalt(10);
+//         const hashedPassword = await bcrypt.hash(password, salt);
+
+//         const userUpdate = await User.findByIdAndUpdate(user?._id, {
+//             name,
+//             email,
+//             password: hashedPassword
+//         }, {new: true});
+
+//         await userUpdate?.save();
+
+//         res.status(200).json(userUpdate);
+//     } catch (error) {
+//         console.error(error);
+//         res.status(500).json({message: "Server Error"});
+//     }
+// };
 export const editUserProfile = async (req: Request, res: Response) => {
     const { name, email, password } = req.body;
 
     try {
         const user = await User.findById((req.user as JwtPayloadWithId).id);
 
-        const salt = await bcrypt.genSalt(10);
-        const hashedPassword = await bcrypt.hash(password, salt);
+        if (!user) {
+            return res.status(404).json({ message: "User not found" });
+        }
 
-        const userUpdate = await User.findByIdAndUpdate(user?._id, {
-            name,
-            email,
-            password: hashedPassword
-        }, {new: true});
+        if (name) {
+            user.name = name;
+        }
 
-        await userUpdate?.save();
+        if (email) {
+            user.email = email;
+        }
 
+        if (password) {
+            const salt = await bcrypt.genSalt(10);
+            user.password = await bcrypt.hash(password, salt);
+        }
+
+        const userUpdate = await user.save();
         res.status(200).json(userUpdate);
     } catch (error) {
         console.error(error);
-        res.status(500).json({message: "Server Error"});
+        res.status(500).json({ message: "Server Error" });
     }
 };
